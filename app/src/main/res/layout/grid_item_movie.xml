@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mcochin.popularmovies.custom.MoviePosterGridItemImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/movie_poster_imageview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:clickable="true"
+    android:scaleType="fitXY"
+    android:contentDescription="@string/poster_content_description_default"/>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+
+    <string name="themoviedb_api_key" translatable="false">7e09483bd454a2c1f2753289687a4fd9</string>
+    <string name="rating_out_of_10" translatable="false" >%1$s / 10</string>
+
+    <!-- Network error msg-->
+    <string name="network_error_msg">Network error: Unable to load data.</string>
+
+    <!-- Strings for the overflow menu-->
+    <string name="action_most_popular">Popular</string>
+    <string name="action_highest_rated">Highest Rated</string>
+
+    <!-- Title of the ActionBar for when a overflow menu item is selected-->
+    <string name="title_popular_movies">Popular Movies</string>
+    <string name="title_highest_rated_movies">Highest Rated Movies</string>
+
+    <string name="poster_content_description_default">Movie Poster</string>
+
+
+</resources>

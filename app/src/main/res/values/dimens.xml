@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--The AutoFitRecyclerView will use this value to determine how many columns to make-->
+    <dimen name="movie_grid_item_width">120dp</dimen>
+
+    <!-- Scale animation for grid_item_movie click-->
+    <item name="anim_scale_change" type="dimen" format="float">0.9</item>
+
+    <!-- Dimens for the fragment_movie_detail-->
+    <dimen name="movie_title_color_banner_min_height">100dp</dimen>
+</resources>

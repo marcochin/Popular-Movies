@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Popular Movies</string>
 
-    <string name="themoviedb_api_key" translatable="false">INSERT_API_KEY</string>
+    <string name="themoviedb_api_key" translatable="false">7e09483bd454a2c1f2753289687a4fd9</string>
     <string name="rating_out_of_10" translatable="false" >%1$s / 10</string>
     <string name="minutes_runtime" translatable="false" >%1$s min</string>
 

@@ -3,7 +3,7 @@ Android: This app displays a list of current popular/highest rated movies and le
 ***
 
 ### Notes:
-API key has been removed from the source code! Please create your own API key by signing up at https://www.themoviedb.org
+API key has been removed from the source code! Please create your own API key by signing up at https://www.themoviedb.org.
 Once you have your API key, please insert it in the `strings.xml` under the string: </br>
 `<string name="themoviedb_api_key" translatable="false">INESRT_API_KEY</string>`
 

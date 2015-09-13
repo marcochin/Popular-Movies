@@ -4,90 +4,46 @@
 package com.mcochin.popularmovies;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.mcochin.popularmovies.fragments.MovieDetailFragment;
 import com.mcochin.popularmovies.fragments.MovieGridFragment;
-import com.mcochin.popularmovies.fragments.NetworkFragment;
-import com.mcochin.popularmovies.pojo.JsonResults;
 import com.mcochin.popularmovies.pojo.Movie;
+import com.mcochin.popularmovies.services.NetworkService;
 
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-
-public class MainActivity extends AppCompatActivity
-        implements NetworkFragment.Callback, MovieGridFragment.Callback{
+public class MainActivity extends AppCompatActivity implements MovieGridFragment.Callback{
+    public static final String TITLE_KEY = "title";
     private boolean mTwoPane;
-
+    private MovieGridFragment mMovieGridFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Determine if tablet or phone
         mTwoPane = findViewById(R.id.movie_detail_container) != null;
 
-        //Instantiate the retained networkFragment
-        if(savedInstanceState == null) {
-            NetworkFragment networkFragment = new NetworkFragment();
+        mMovieGridFragment = ((MovieGridFragment)getSupportFragmentManager().
+                findFragmentById(R.id.fragment_movie_grid));
+        mMovieGridFragment.setCallback(this);
 
-            getSupportFragmentManager().beginTransaction()
-                    .add(networkFragment, NetworkFragment.TAG)
-                    .commit();
-
-            getSupportFragmentManager().executePendingTransactions();
-        }
-
-        //set callbacks for fragments
-        ((MovieGridFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_movie_grid)).setCallback(this);
-
-        NetworkFragment networkFragment = ((NetworkFragment) getSupportFragmentManager()
-                        .findFragmentByTag(NetworkFragment.TAG));
-        networkFragment.setCallback(this);
-
-        //Load popular movies on first open
-        if(savedInstanceState == null) {
-            networkFragment.loadPopularMovies();
+        if(savedInstanceState != null){
+            setTitle(savedInstanceState.getCharSequence(TITLE_KEY));
         }
     }
 
     @Override
-    public void onNetworkSuccess(JsonResults jsonResults, Response response, int sortType) {
-        String title = "";
-
-        switch(sortType){
-            case NetworkFragment.SORT_POPULAR:
-                title = getString(R.string.title_popular_movies);
-                break;
-            case NetworkFragment.SORT_HIGHEST_RATED:
-                title = getString(R.string.title_highest_rated_movies);
-                break;
-        }
-
-        //Change the title of actionBar corresponding to the sort type
-        setTitle(title);
-
-        //Send the movieList to the MovieGridFragment to display
-        MovieGridFragment movieGridfragment = (MovieGridFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_movie_grid);
-
-        movieGridfragment.setMovieList(jsonResults.getResults());
-    }
-
-    @Override
-    public void onNetworkFailure(RetrofitError error) {
-    }
-
-    @Override
-    public void onMovieItemClick(Movie movie) {
+    public void onMovieItemClick(Movie movie, int position) {
         Bundle args = new Bundle();
         args.putParcelable(Movie.MOVIE_KEY, movie);
+        args.putInt(MovieGridFragment.GRID_POSITION_KEY, position);
 
         if(mTwoPane){
-            //If we are on tablet just load a Fragment;
+            // If we are on tablet just load a Fragment;
             Fragment movieDetailFragment = new MovieDetailFragment();
             movieDetailFragment.setArguments(args);
 
@@ -95,11 +51,33 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.movie_detail_container, movieDetailFragment)
                     .commit();
         } else {
-            //If we are on phone load an Activity
+            // If we are on phone load an Activity
+            args.putCharSequence(TITLE_KEY, getTitle());
+
             Intent movieDetailIntent = new Intent(this, MovieDetailActivity.class);
-            movieDetailIntent.putExtra(Movie.MOVIE_KEY, movie);
-            movieDetailIntent.putExtra(MovieDetailActivity.TITLE_KEY, getTitle());
-            startActivity(movieDetailIntent);
+            movieDetailIntent.putExtra(MovieDetailActivity.ARGUMENTS_KEY, args);
+            startActivityForResult(movieDetailIntent, MovieDetailActivity.REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putCharSequence(TITLE_KEY, getTitle());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // If the user is using a phone and removes a movie from favorites,it will be removed when
+        // he exits the MovieDetailActivity and this if statement will be executed.
+        if(requestCode == MovieDetailActivity.REQUEST_CODE){
+            if (resultCode == MovieDetailFragment.RESULT_REMOVE_FAVORITE && data != null){
+                mMovieGridFragment.removeFavoriteMovie(data.getIntExtra(MovieGridFragment.GRID_POSITION_KEY,
+                                MovieGridFragment.ERROR));
+            }
         }
     }
 }

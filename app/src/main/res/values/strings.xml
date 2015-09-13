@@ -3,19 +3,32 @@
 
     <string name="themoviedb_api_key" translatable="false">7e09483bd454a2c1f2753289687a4fd9</string>
     <string name="rating_out_of_10" translatable="false" >%1$s / 10</string>
+    <string name="minutes_runtime" translatable="false" >%1$s min</string>
 
     <!-- Network error msg-->
-    <string name="network_error_msg">Network error: Unable to load data.</string>
+    <string name="toast_msg_network_error">Network error: Unable to load data.</string>
+    <string name="toast_msg_favorites_error">There are no favorites.</string>
 
     <!-- Strings for the overflow menu-->
     <string name="action_most_popular">Popular</string>
     <string name="action_highest_rated">Highest Rated</string>
+    <string name="action_favorites">Favorites</string>
 
     <!-- Title of the ActionBar for when a overflow menu item is selected-->
     <string name="title_popular_movies">Popular Movies</string>
     <string name="title_highest_rated_movies">Highest Rated Movies</string>
+    <string name="title_favorite_movies">Favorite Movies</string>
 
-    <string name="poster_content_description_default">Movie Poster</string>
+    <!-- Strings that belong to Fragment Detail -->
+    <string name="text_favorite_button_add">Add to \nFavorites</string>
+    <string name="text_favorite_button_remove">Remove from \nFavorites</string>
+    <string name="toast_msg_added_to_favorites">Added to favorites.</string>
+    <string name="toast_msg_removed_from_favorites">Removed from favorites.</string>
+    <string name="list_title_trailers">Trailers:</string>
+    <string name="list_title_reviews">Reviews:</string>
 
+    <!--Content Descriptions-->
+    <string name="content_description_poster_default">Movie Poster</string>
+    <string name="content_description_trailer_default">Play Trailer</string>
 
 </resources>

@@ -10,6 +10,8 @@ import android.widget.ImageView;
  * Custom ImageView so that it is the optimal height for a movie poster
  */
 public class MoviePosterGridItemImageView extends ImageView {
+    private static final float POSTER_WIDTH_RATIO_TO_HEIGHT = 2f/3;
+
     public MoviePosterGridItemImageView(Context context) {
         super(context);
     }
@@ -32,7 +34,7 @@ public class MoviePosterGridItemImageView extends ImageView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         //The height should be 33% longer than the width.
-        float newMeasuredHeight = getMeasuredWidth() / (2f/3);
+        float newMeasuredHeight = getMeasuredWidth() / POSTER_WIDTH_RATIO_TO_HEIGHT;
         setMeasuredDimension(getMeasuredWidth(), (int)newMeasuredHeight);
     }
 }

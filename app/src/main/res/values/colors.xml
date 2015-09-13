@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="movie_title_color_banner_color">#4285f4</color>
+    <color name="movie_detail_primary_color">#4285f4</color>
+
+    <color name="favorite_button_add_focused">#3b77db</color>
+    <color name="favorite_button_add_pressed">#346ac3</color>
+
+
+    <color name="favorite_button_remove_normal">#ff0000</color>
+    <color name="favorite_button_remove_focused">#e50000</color>
+    <color name="favorite_button_remove_pressed">#cc0000</color>
+
+    <color name="trailer_button_focused">#e3e3e3</color>
+    <color name="trailer_button_pressed">#cccccc</color>
+
+
 </resources>

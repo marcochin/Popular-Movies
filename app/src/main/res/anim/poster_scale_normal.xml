@@ -4,8 +4,8 @@
     android:fillAfter="true">
 
     <scale android:duration="100"
-        android:fromXScale="@dimen/anim_scale_change"
-        android:fromYScale="@dimen/anim_scale_change"
+        android:fromXScale="@dimen/movie_grid_item_anim_scale_change"
+        android:fromYScale="@dimen/movie_grid_item_anim_scale_change"
         android:toXScale="1.0"
         android:toYScale="1.0"
         android:pivotX="50%"

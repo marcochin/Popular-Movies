@@ -3,12 +3,14 @@ package com.mcochin.popularmovies.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.mcochin.popularmovies.interfaces.Results;
+
 /**
  * JsonResults.java's "results" variable contains a list of Movies.
  * This Movie class contains information for a specific movie in the list.
  */
 
-public class Movie implements Parcelable {
+public class Movie implements Parcelable, Results {
     // Valid image sizes: "w92", "w154", "w185", "w342", "w500", "w780", or "original"
     private static final String POSTER_IMG_BASE_URL = "http://image.tmdb.org/t/p/w185";
     public static final String MOVIE_KEY = "movie";
@@ -77,6 +79,7 @@ public class Movie implements Parcelable {
     }
 
     protected Movie(Parcel in) {
+        id = in.readInt();
         originalTitle = in.readString();
         posterPath = in.readString();
         overview = in.readString();
@@ -91,6 +94,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(originalTitle);
         dest.writeString(posterPath);
         dest.writeString(overview);

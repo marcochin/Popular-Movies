@@ -2,7 +2,6 @@ package com.mcochin.popularmovies.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,16 +26,16 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.Movi
      * This Callback is for communicating when an item has been touched
      */
     public interface Callback {
-        void onItemFocusChange(View v, boolean hasFocus);
-        boolean onItemTouch(View v, MotionEvent event, Movie movie);
+        void onMovieItemFocusChange(View v, boolean hasFocus);
+        boolean onMovieItemTouch(View v, MotionEvent event, Movie movie, RecyclerView.ViewHolder holder);
     }
 
     public static class MoviePosterHolder extends RecyclerView.ViewHolder{
-        ImageView moviePoster;
+        ImageView mMoviePoster;
 
         public MoviePosterHolder(View itemView) {
             super(itemView);
-            moviePoster = (ImageView)itemView.findViewById(R.id.movie_poster_imageview);
+            mMoviePoster = (ImageView)itemView.findViewById(R.id.movie_poster_imageview);
         }
     }
 
@@ -53,27 +52,26 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.Movi
     }
 
     @Override
-    public void onBindViewHolder(MoviePosterHolder holder, int position) {
+    public void onBindViewHolder(final MoviePosterHolder holder, int position) {
         final Movie movie = mMovieList.get(position);
 
         Picasso.with(mContext).load(movie.getPosterPath())
                 .error(R.drawable.movie_poster_error)
-                .into(holder.moviePoster);
-        holder.moviePoster.setContentDescription(movie.getOriginalTitle());
+                .into(holder.mMoviePoster);
+        holder.mMoviePoster.setContentDescription(movie.getOriginalTitle());
 
         if(mCallback != null) {
             holder.itemView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    return mCallback.onItemTouch(v, event, movie);
-
+                    return mCallback.onMovieItemTouch(v, event, movie, holder);
                 }
             });
 
             holder.itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    mCallback.onItemFocusChange(v, hasFocus);
+                    mCallback.onMovieItemFocusChange(v, hasFocus);
                 }
             });
         }

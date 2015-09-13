@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.mcochin.popularmovies.custom.AutoFitRecyclerView
+    <com.mcochin.popularmovies.custom.AutoFitGridRecyclerView
         android:id="@+id/poster_grid_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

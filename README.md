@@ -1,5 +1,12 @@
 # Popular-Movies
 Android: This app displays a list of current popular/highest rated movies and lets you view its details (rating, synopsis, trailers, etc).
+
+<ul>
+<li>This app uses <code>Intents</code> to open up trailers in the YouTube app and <code>SharedPreferences</code> for storing favorites.</li>
+<li>App has a <code>GridLayoutManager</code> for displaying movies in a grid and autofits to the size of the screen.
+<li>Incorportates a Master Detail View for better use of space on tablets and compactness in phones.</li>
+</ul>
+
 ***
 
 ### Notes:
